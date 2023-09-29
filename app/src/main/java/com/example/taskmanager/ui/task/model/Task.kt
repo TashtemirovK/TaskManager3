@@ -1,9 +1,20 @@
 package com.example.taskmanager.ui.task.model
 
-import java.io.Serializable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 
+@Entity
 data class Task(
-    val title: String? = null,
-    val desc: String? = null
-):Serializable
+    @PrimaryKey(autoGenerate = true)
+    val uid: Int? = null,
+    val tittle: String? = null,
+    val desc: String? = null,
+) : java.io.Serializable
+
+
+
+
+
+
+
