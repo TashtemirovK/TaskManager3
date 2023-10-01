@@ -6,45 +6,60 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.taskmanager.databinding.ItemTaskBinding
-import com.example.taskmanager.ui.task.model.Task
+import com.example.taskmanager.model.Task
 
-class TaskAdapter : Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private val onLongClick: (Task) -> Unit) : Adapter<TaskAdapter.TaskViewHolder>() {
+    private val data = arrayListOf<Task>()
+    private var color = true
 
-    private val list = arrayListOf<Task>()
-
-    inner class TaskViewHolder(private val binding: ItemTaskBinding) : ViewHolder(binding.root) {
-
-        fun bind(task: Task) {
-
-            if (adapterPosition % 2 == 0) {
-                binding.tvTitle.setTextColor(Color.WHITE)
-                binding.tvDesc.setTextColor(Color.BLACK)
-                itemView.setBackgroundColor(Color.BLACK)
-            }
-            binding.tvTitle.text.toString()
-            binding.tvDesc.text.toString()
-        }
-    }
-
-    fun setData(data: Task) {
-        list.add(0, data)
+    fun addTask(tasks: List<Task>) {
+        data.clear()
+        data.addAll(tasks)
         notifyDataSetChanged()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder(
             ItemTaskBinding.inflate(
                 LayoutInflater.from(parent.context),
-                parent, false
+                parent,
+                false
             )
         )
     }
 
-    override fun getItemCount(): Int {
-        return list.size
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+        holder.bind(data[position])
     }
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(list.get(position))
+    override fun getItemCount(): Int {
+        return data.count()
+    }
+
+    inner class TaskViewHolder(private val binding: ItemTaskBinding) : ViewHolder(binding.root) {
+
+
+        fun bind(task: Task) {
+            with(binding) {
+                tvTitle.text = task.title
+                tvDesc.text = task.desc
+                itemView.setOnLongClickListener {
+                    onLongClick(task)
+                    false
+                }
+            }
+            if (color) {
+                itemView.setBackgroundColor(Color.BLACK)
+                binding.tvDesc.setTextColor(Color.WHITE)
+                binding.tvTitle.setTextColor(Color.WHITE)
+                color = false
+            } else {
+                itemView.setBackgroundColor(Color.WHITE)
+                binding.tvDesc.setTextColor(Color.BLACK)
+                binding.tvTitle.setTextColor(Color.BLACK)
+                color = true
+            }
+        }
     }
 }

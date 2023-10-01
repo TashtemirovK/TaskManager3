@@ -9,9 +9,9 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
-import com.example.taskmanager.R
+import com.example.taskmanager.App
 import com.example.taskmanager.databinding.FragmentTaskBinding
-import com.example.taskmanager.ui.task.model.Task
+import com.example.taskmanager.model.Task
 
 class TaskFragment : Fragment() {
 
@@ -39,7 +39,7 @@ class TaskFragment : Fragment() {
                 title = binding.etTitle.text.toString(),
                 desc = binding.etDesc.toString()
             )
-            setFragmentResult(RESULT_KEY, bundleOf(TASK_KEY to data))
+            App.db.taskDao().insert(data)
             findNavController().navigateUp()
         }
     }
