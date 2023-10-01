@@ -12,4 +12,5 @@
     <string name="save">Save</string>
     <string name="desc">Desc</string>
     <string name="Title">Title</string>
+    <string name="username">username</string>
 </resources>

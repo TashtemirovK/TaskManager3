@@ -57,8 +57,8 @@ class HomeFragment : Fragment() {
     private fun onLongClick(task: Task) {
 
         val alertDialog = AlertDialog.Builder(requireContext())
-        alertDialog.setTitle(getString(R.string."удалить"))
-        alertDialog.setMessage(getString(R.string."удалить"))
+        alertDialog.setTitle(getString(R.string.delete_title))
+        alertDialog.setMessage(getString(R.string.delete_message))
         alertDialog.setNegativeButton(getString(R.string.no), object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, which: Int) {
                 dialog?.cancel()
