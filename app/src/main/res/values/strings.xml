@@ -11,6 +11,12 @@
     <string name="description">Description</string>
     <string name="save">Save</string>
     <string name="desc">Desc</string>
-    <string name="Title">Title</string>
     <string name="username">username</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="Phone">\n</string>
+    <string name="code">\n\n</string>
+    <string name="Code">Code</string>
+    <string name="accept" />
+    <string name="Accept">accept</string>
 </resources>

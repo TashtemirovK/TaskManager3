@@ -49,8 +49,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.profileImage.loadImage(pref.getImage().toString())
-        binding.etNickName.setText(pref.getName())
-        binding.etNickName.addTextChangedListener {
+        binding.etName.setText(pref.getName())
+        binding.etName.addTextChangedListener {
             pref.saveName(it.toString())
         }
 
